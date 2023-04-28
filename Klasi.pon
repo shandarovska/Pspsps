@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+class Kosharkar
+{
+private:
+    string ime;
+    int plata;
+
+public:
+    Kosharkar(string i = " ", int plat = 30000)
+    {
+        ime = i;
+        plata = plat;
+    }
+    void pechati()
+    {
+        cout << ime << endl;
+    }
+    int vratiPlata(int n)
+    {
+        return plata + 50 * n;
+    }
+};
+
+class Ekipa
+{
+private:
+    string ime;
+    int brKosharkari;
+    int poeni;
+    Kosharkar k[8];
+
+public:
+    Ekipa(string im = " ", int br = 0, int poen = 0, Kosharkar *kos = NULL)
+    {
+        ime = im;
+        brKosharkari = (br > 0) ? br : 0;
+        poeni = (9 >= 0) ? 9 : 0;
+        for (int i = 0; i < brKosharkari; i++)
+            k[i] = kos[i];
+    }
+    void pechati()
+    {
+        cout << ime << " "
+             << "so kosharkari: " << endl;
+        for (int j = 0; j < brKosharkari; j++)
+        {
+            k[j].pechati();
+            cout << k[j].vratiPlata(poeni) << endl;
+        }
+    }
+};
+
+int main()
+{
+    Kosharkar k[2] = {Kosharkar("Sara"),
+                      Kosharkar("Sandra")};
+    Ekipa ekipa("Komiti", 2, 90, k);
+    ekipa.pechati();
+    return 0;
+}
